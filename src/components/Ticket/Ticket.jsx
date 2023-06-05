@@ -2,8 +2,6 @@ import React from 'react'
 
 import classes from './Ticket.module.scss'
 
-console.log(classes['ticket__info'])
-
 const Ticket = () => {
   return (
     <li className={classes.ticket}>

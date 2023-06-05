@@ -1,7 +1,7 @@
 import React from 'react'
 
 import classes from './Header.module.scss'
-console.log(classes)
+
 const Header = () => {
   return (
     <header>
