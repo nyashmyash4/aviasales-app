@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Button } from 'antd'
-
 import Header from '../Header/Header'
 import TicketsFilter from '../TicketsFilter/TicketsFilter'
 import TicketsSort from '../TicketsSort/TicketsSort'
@@ -18,9 +16,6 @@ const App = () => {
         <div className={classes['main__tickets-container']}>
           <TicketsSort />
           <TicketList />
-          <Button block={true} type='primary'>
-            Показать еще 5 билетов
-          </Button>
         </div>
       </section>
     </div>
