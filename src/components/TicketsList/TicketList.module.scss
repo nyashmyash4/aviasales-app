@@ -38,6 +38,10 @@
   margin-bottom: 20px;
   width: 100%;
 }
+.btn:disabled {
+  background-color: $color-gray;
+  cursor: no-drop;
+}
 
 @media (min-width: 320px) and (max-width: 767px) {
   .tickets {

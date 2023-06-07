@@ -66,6 +66,7 @@ const TicketList = (props) => {
           showTickets(ticketsList, ticketsToShow)
         )}
       </ul>
+
       <button className={classes.btn} type="button" onClick={showMoreTickets} disabled={!ticketsList.length}>
         Показать еще 5 билетов!
       </button>
