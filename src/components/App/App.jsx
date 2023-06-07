@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '../Header/Header'
 import TicketsFilter from '../TicketsFilter/TicketsFilter'
-import TicketsSort from '../TicketsSort/TicketsSort'
+import TicketsSortTabs from '../TicketsSortTabs/TicketsSortTabs'
 import TicketList from '../TicketsList/TicketList'
 
 import classes from './App.module.scss'
@@ -12,9 +12,12 @@ const App = () => {
     <div className={classes.wrapper}>
       <Header />
       <section className={classes.main}>
-        <TicketsFilter />
+        <div className={classes.sidebar}>
+          <h3 className={classes['side-header']}>Количество пересадок</h3>
+          <TicketsFilter />
+        </div>
         <div className={classes['main__tickets-container']}>
-          <TicketsSort />
+          <TicketsSortTabs />
           <TicketList />
         </div>
       </section>

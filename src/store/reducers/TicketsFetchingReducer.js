@@ -1,38 +1,41 @@
+import * as types from '../actionTypes'
+
 const initialState = {
-  loading: false,
   tickets: [],
   searchId: null,
   ticketsToShow: 5,
+  stop: false,
+  error: false,
 }
 
 export const ticketsFetchingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'START_FETCHING': {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-
-    case 'LOAD_TICKETS': {
+    case types.LOAD_TICKETS: {
       return {
         ...state,
         tickets: state.tickets.concat(action.tickets),
-        loading: false,
+        stop: action.stop,
       }
     }
 
-    case 'SHOW_MORE_TICKETS': {
+    case types.SHOW_MORE_TICKETS: {
       return {
         ...state,
         ticketsToShow: state.ticketsToShow + 5,
       }
     }
 
-    case 'GET_SEARCH_ID': {
+    case types.GET_SEARCH_ID: {
       return {
         ...state,
         searchId: action.payload,
+      }
+    }
+
+    case types.ERROR: {
+      return {
+        ...state,
+        error: true,
       }
     }
 

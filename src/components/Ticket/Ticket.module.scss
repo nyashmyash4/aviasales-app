@@ -1,8 +1,10 @@
+@import '../../assets/style/variables.scss';
+
 .ticket {
   width: 502px;
   height: 184px;
-  background-color: #ffffff;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: $color-white;
+  box-shadow: $box-shadow-ticket;
   border-radius: 5px;
   padding: 20px;
   display: flex;
@@ -14,7 +16,7 @@
     justify-content: space-between;
 
     .ticket-header__price {
-      color: #2196f3;
+      color: $color-primary;
       font-style: normal;
       font-weight: 600;
       font-size: 24px;
@@ -40,10 +42,11 @@
         flex-direction: column;
         text-align: start;
         margin-bottom: 10px;
-
+        width: 100px;
+        align-items: center;
         .ticket__text--gray {
           text-transform: uppercase;
-          color: gray;
+          color: $color-gray;
           margin-bottom: 5px;
         }
       }
@@ -53,7 +56,28 @@
 
 @media (min-width: 320px) and (max-width: 767px) {
   .ticket {
-    width: 300px;
+    width: 90%;
     margin: 0 auto;
+  }
+
+  .ticket {
+    width: 90%;
+    margin: 0 auto;
+
+    .ticket-header {
+      .ticket-header__price {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 20px;
+      }
+
+      .ticket-header__company {
+        width: 110px;
+      }
+    }
+    .ticket__body {
+      font-size: 12px;
+      gap: 20px;
+    }
   }
 }

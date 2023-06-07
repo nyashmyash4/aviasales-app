@@ -1,19 +1,21 @@
+import * as types from '../actionTypes'
+
 const initialState = {
-  ticketsSort: 'cheapest',
+  sortTabs: 'cheapest',
 }
 
-export const ticketsSortReducer = (state = initialState, action) => {
+export const sortTabsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CHEAPEST':
+    case types.CHEAPEST:
       return {
         ...state,
-        ticketsSort: 'cheapest',
+        sortTabs: 'cheapest',
       }
 
-    case 'FASTEST':
+    case types.FASTEST:
       return {
         ...state,
-        ticketsSort: 'fastest',
+        sortTabs: 'fastest',
       }
 
     default:

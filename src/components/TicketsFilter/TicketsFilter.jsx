@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { toggleAll, toggleChecked } from '../../store/actions'
+
 import classes from './TicketsFilter.module.scss'
 
 const TicketsFilter = ({ filters, toggleChecked, toggleAll }) => {
@@ -12,10 +13,10 @@ const TicketsFilter = ({ filters, toggleChecked, toggleAll }) => {
         <li key={id}>
           <input
             id={name}
-            type='checkbox'
+            type="checkbox"
             className={classes['filter-checkbox']}
-            checked={filters.filter((item) => item.id !== 1).every((item) => item.isChecked)}
-            onChange={(evt) => toggleAll(evt.target.checked)}
+            checked={isChecked}
+            onChange={(evt) => toggleAll(evt.target.checked, id, name)}
           ></input>
           <label htmlFor={name}>{label}</label>
         </li>
@@ -25,27 +26,22 @@ const TicketsFilter = ({ filters, toggleChecked, toggleAll }) => {
       <li key={id}>
         <input
           id={name}
-          type='checkbox'
+          type="checkbox"
           className={classes['filter-checkbox']}
           checked={isChecked}
-          onChange={() => toggleChecked(id)}
+          onChange={() => toggleChecked(id, name)}
         ></input>
         <label htmlFor={name}>{label}</label>
       </li>
     )
   })
 
-  return (
-    <aside className={classes.sidebar}>
-      <h3 className={classes['side-header']}>Количество пересадок</h3>
-      <ul className={classes['side-filter']}>{elements}</ul>
-    </aside>
-  )
+  return <ul className={classes['side-filter']}>{elements}</ul>
 }
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.ticketsFilter,
+    filters: state.ticketsFilter.filters,
   }
 }
 

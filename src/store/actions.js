@@ -1,51 +1,72 @@
+import * as types from './actionTypes'
+
 export const cheapest = () => {
-  return { type: 'CHEAPEST' }
+  return { type: types.CHEAPEST }
 }
 export const fastest = () => {
-  return { type: 'FASTEST' }
+  return { type: types.FASTEST }
 }
 
-export const toggleAll = (checked) => {
-  return { type: 'ALL', checked }
+export const toggleAll = (checked, id, name) => {
+  return { type: types.ALL, checked, id, name }
 }
 
-export const toggleChecked = (id) => {
-  return { type: 'CHECKED', id }
+export const toggleChecked = (id, name) => {
+  return { type: types.CHECKED, id, name }
 }
 
 export const showMoreTickets = () => {
-  return { type: 'SHOW_MORE_TICKETS' }
+  return { type: types.SHOW_MORE_TICKETS }
 }
 
 export const startFetching = () => {
-  return { type: 'START_FETCHING' }
+  return { type: types.START_FETCHING }
 }
 export const getSearchId = (payload) => {
-  return { type: 'GET_SEARCH_ID', payload }
+  return { type: types.GET_SEARCH_ID, payload }
 }
 
 export const loadTickets = (tickets, stop) => {
-  return { type: 'LOAD_TICKETS', tickets, stop }
+  return { type: types.LOAD_TICKETS, tickets, stop }
+}
+
+export const error = () => {
+  return { type: types.ERROR }
 }
 
 export const fetchTickets = (searchId) => {
   return async (dispatch) => {
-    dispatch(startFetching())
+    try {
+      const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
+      if (response.status === 404) {
+        throw new Error('not found')
+      }
+      const result = await response.json()
+      dispatch(loadTickets(result.tickets, result.stop))
+    } catch (err) {
+      if (err.message === 'not found') {
+        dispatch(error())
+      }
 
-    const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
-
-    const result = await response.json()
-    dispatch(loadTickets(result.tickets, result.stop))
+      dispatch(loadTickets([], false))
+    }
   }
 }
 
 export const fetchId = () => {
   return async (dispatch) => {
-    dispatch(startFetching())
-
-    const response = await fetch(`https://aviasales-test-api.kata.academy/search`)
-
-    const result = await response.json()
-    dispatch(getSearchId(result.searchId))
+    try {
+      const response = await fetch('https://aviasales-test-api.kata.academy/search')
+      if (response.status === 404) {
+        throw new Error('not found')
+      }
+      const result = await response.json()
+      dispatch(getSearchId(result.searchId))
+    } catch (err) {
+      if (err.message === 'not found') {
+        dispatch(error())
+      }
+      dispatch(fetchId())
+    }
   }
 }

@@ -1,3 +1,5 @@
+@import '../../assets/style/variables.scss';
+
 * {
   padding: 0px;
   margin: 0px;
@@ -122,7 +124,7 @@ legend {
 
 .wrapper {
   min-height: 100vh;
-  background-color: #f3f7fa;
+  background-color: $color-primary-background;
 
   .main {
     display: flex;
@@ -136,13 +138,28 @@ legend {
       flex-direction: column;
       gap: 20px;
     }
+
+    .sidebar {
+      width: 232px;
+      height: 252px;
+      box-shadow: $box-shadow-ticket;
+      background-color: $color-white;
+      border-radius: 5px;
+      padding: 20px 0;
+
+      .side-header {
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-bottom: 5px;
+        padding: 0 20px;
+      }
+    }
   }
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
   .wrapper {
     min-height: 100vh;
-    background-color: #f3f7fa;
     width: 100%;
 
     .main {
@@ -151,7 +168,18 @@ legend {
       gap: 20px;
       width: 100%;
 
-      // margin: 0 auto;
+      .sidebar {
+        width: 90%;
+        height: 100%;
+        padding: 10px;
+        margin: 0 10px;
+        align-self: center;
+        .side-header {
+          font-size: 12px;
+          margin-top: 10px;
+          margin-bottom: 18px;
+        }
+      }
 
       .main__tickets-container {
         display: flex;

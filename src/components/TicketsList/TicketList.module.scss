@@ -1,6 +1,50 @@
+@import '../../assets/style/variables.scss';
+
 .tickets {
   width: 502px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  .tickets__error--not-found {
+    display: block;
+    font-size: 14px;
+    border: 1px solid $color-yellow-border;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    width: 80%;
+    align-self: center;
+    background-color: $color-yellow-background;
+  }
+
+  .tickets__error {
+    display: block;
+    font-size: 14px;
+    border: 1px solid $color-red-border;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    width: 80%;
+    align-self: center;
+    background-color: $color-red-background;
+  }
+}
+.btn {
+  background-color: $color-primary;
+  border-radius: 6px;
+  padding: 15px;
+  color: $color-white;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .tickets {
+    width: 100%;
+  }
+  .btn {
+    width: 75%;
+    padding: 12px;
+  }
 }

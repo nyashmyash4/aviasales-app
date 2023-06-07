@@ -1,100 +1,66 @@
-.sidebar {
-  width: 232px;
-  height: 252px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  border-radius: 5px;
-  padding: 20px 0;
+@import '../../assets/style/variables.scss';
 
-  .side-header {
-    text-transform: uppercase;
-    font-size: 12px;
-    margin-bottom: 5px;
+.side-filter {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  .filter-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  .filter-checkbox + label {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    user-select: none;
     padding: 0 20px;
   }
-  .side-filter {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
+  .filter-checkbox + label:hover {
+    background-color: $color-lightblue-third;
+  }
+  .filter-checkbox + label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid $color-lightblue-second;
+    border-radius: 2px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+  }
+  .filter-checkbox:checked + label::before {
+    border-color: $color-primary;
+    background-size: 12px 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M4.28571 8L0 4.16123L1.20857 3.0787L4.28571 5.82726L10.7914 0L12 1.09021L4.28571 8Z' fill='%232196F3'/%3E%3C/svg%3E");
+  }
+  .filter-checkbox:not(:disabled):not(:checked) + label:hover::before {
+    border-color: $color-primary;
+  }
+  .filter-checkbox:not(:disabled):active + label::before {
+    background-color: $color-lightblue-fourth;
+    border-color: $color-primary;
+  }
 
-    // gap: 18px;
+  .filter-checkbox:focus + label::before {
+    box-shadow: $box-shadow-checkbox;
+  }
 
-    .filter-checkbox {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-      width: 100%;
-    }
-    .filter-checkbox + label {
-      display: inline-flex;
-      align-items: center;
-      height: 40px;
-      width: 100%;
-      user-select: none;
-      padding: 0 20px;
-    }
-    .filter-checkbox + label:hover {
-      background-color: #f1fcff;
-    }
-    .filter-checkbox + label::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      flex-grow: 0;
-      border: 1px solid #9abbce;
-      border-radius: 2px;
-      margin-right: 10px;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50% 50%;
-    }
-    .filter-checkbox:checked + label::before {
-      border-color: #2196f3;
-      background-size: 12px 8px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M4.28571 8L0 4.16123L1.20857 3.0787L4.28571 5.82726L10.7914 0L12 1.09021L4.28571 8Z' fill='%232196F3'/%3E%3C/svg%3E");
-    }
-    .filter-checkbox:not(:disabled):not(:checked) + label:hover::before {
-      border-color: #2196f3;
-    }
-    /* стили для активного состояния чекбокса (при нажатии на него) */
-    // .filter-checkbox:not(:disabled):active + label::before {
-    //   background-color: #b3d7ff;
-    //   border-color: #2196f3;
-    // }
-    /* стили для чекбокса, находящегося в фокусе */
-    .filter-checkbox:focus + label::before {
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-    /* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
-    .filter-checkbox:focus:not(:checked) + label::before {
-      border-color: #2196f3;
-    }
+  .filter-checkbox:focus:not(:checked) + label::before {
+    border-color: $color-primary;
   }
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
-  .sidebar {
-    width: 300px;
-    height: 170px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 0 auto;
-    align-self: center;
-
-    .side-header {
-      text-transform: uppercase;
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
-    .side-filter {
-      flex-direction: row;
-      flex-wrap: wrap;
-      font-size: 14px;
-      gap: 18px;
-    }
+  .side-filter {
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 14px;
   }
 }
