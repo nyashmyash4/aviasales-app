@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { customAlphabet } from 'nanoid'
 
-import { startFetching, fetchTickets, showMoreTickets, fetchId } from '../../store/actions'
+import {
+  startFetching,
+  fetchTickets,
+  showMoreTickets,
+  fetchId,
+} from '../../store/reducers/TicketsFetching/actionsFetching'
 import Ticket from '../Ticket/Ticket'
 import Loader from '../Loader/Loader'
 import { filterTickets } from '../../utils/filterTickets'
 
 import classes from './TicketList.module.scss'
 
-const nanoid = customAlphabet('1234567890abcef', 5)
+const nanoid = customAlphabet('1234567890abcef', 10)
 
 const TicketList = (props) => {
   const { tickets, stop, fetchTickets, ticketsToShow, showMoreTickets, searchId, fetchId, sortTab, filters, error } =
@@ -44,28 +49,20 @@ const TicketList = (props) => {
       const elements = ticketsList.slice(0, ticketsToShow).map((ticket) => {
         return <Ticket ticket={ticket} key={nanoid()} />
       })
-      const loader = !stop ? <Loader /> : null
-      return (
-        <>
-          {loader}
-          {elements}
-        </>
-      )
-    } else {
-      return (
-        <li className={classes['tickets__error--not-found']}>Рейсов, подходящих под заданные фильтры, не найдено</li>
-      )
+      return <>{elements}</>
     }
+    return <li className={classes['tickets__error--not-found']}>Рейсов, подходящих под заданные фильтры, не найдено</li>
   }
+
+  const loader = !stop && !error ? <Loader /> : null
   return (
     <>
-      <ul className={classes.tickets}>
-        {error ? (
-          <li className={classes['tickets__error']}>Призошла ошибка, попробуйте перезагрузить страницу</li>
-        ) : (
-          showTickets(ticketsList, ticketsToShow)
-        )}
-      </ul>
+      {loader}
+      {error ? (
+        <div className={classes['tickets__error']}>Призошла ошибка, попробуйте перезагрузить страницу</div>
+      ) : (
+        <ul className={classes.tickets}>{showTickets(ticketsList, ticketsToShow)}</ul>
+      )}
 
       <button className={classes.btn} type="button" onClick={showMoreTickets} disabled={!ticketsList.length}>
         Показать еще 5 билетов!

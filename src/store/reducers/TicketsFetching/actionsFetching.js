@@ -1,19 +1,4 @@
-import * as types from './actionTypes'
-
-export const cheapest = () => {
-  return { type: types.CHEAPEST }
-}
-export const fastest = () => {
-  return { type: types.FASTEST }
-}
-
-export const toggleAll = (checked, id, name) => {
-  return { type: types.ALL, checked, id, name }
-}
-
-export const toggleChecked = (id, name) => {
-  return { type: types.CHECKED, id, name }
-}
+import * as types from '../../actionTypes'
 
 export const showMoreTickets = () => {
   return { type: types.SHOW_MORE_TICKETS }
@@ -46,6 +31,7 @@ export const fetchTickets = (searchId) => {
     } catch (err) {
       if (err.message === 'not found') {
         dispatch(error())
+        return
       }
 
       dispatch(loadTickets([], false))

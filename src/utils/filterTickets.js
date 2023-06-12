@@ -26,26 +26,37 @@ export function filterTickets(tickets, filters, sortValue) {
   let filteredArr = []
   if (filters.length) {
     filters.forEach((filter) => {
-      if (filter.name === 'no transfer') {
-        const filtered = newTickets.filter((el) => !el.segments[0].stops.length || !el.segments[1].stops.length)
-        filteredArr.push(...filtered)
-      } else if (filter.name === '1 transfer') {
-        const filtered = newTickets.filter(
-          (el) => el.segments[0].stops.length === 1 || el.segments[1].stops.length === 1
-        )
-        filteredArr.push(...filtered)
-      } else if (filter.name === '2 transfers') {
-        const filtered = newTickets.filter(
-          (el) => el.segments[0].stops.length === 2 || el.segments[1].stops.length === 2
-        )
-        filteredArr.push(...filtered)
-      } else if (filter.name === '3 transfers') {
-        const filtered = newTickets.filter(
-          (el) => el.segments[0].stops.length === 2 || el.segments[1].stops.length === 2
-        )
-        filteredArr.push(...filtered)
-      } else {
-        filteredArr.push(...newTickets)
+      switch (filter.name) {
+        case 'no transfer': {
+          const filtered = newTickets.filter((el) => !el.segments[0].stops.length || !el.segments[1].stops.length)
+          filteredArr.push(...filtered)
+          break
+        }
+        case '1 transfer': {
+          const filtered = newTickets.filter(
+            (el) => el.segments[0].stops.length === 1 || el.segments[1].stops.length === 1
+          )
+          filteredArr.push(...filtered)
+          break
+        }
+        case '2 transfers': {
+          const filtered = newTickets.filter(
+            (el) => el.segments[0].stops.length === 2 || el.segments[1].stops.length === 2
+          )
+          filteredArr.push(...filtered)
+          break
+        }
+        case '3 transfers': {
+          const filtered = newTickets.filter(
+            (el) => el.segments[0].stops.length === 2 || el.segments[1].stops.length === 2
+          )
+          filteredArr.push(...filtered)
+          break
+        }
+        default: {
+          filteredArr.push(...newTickets)
+          break
+        }
       }
     })
   }

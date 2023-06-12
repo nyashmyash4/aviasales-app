@@ -1,11 +1,9 @@
 import React from 'react'
-import { customAlphabet } from 'nanoid'
 
 import { formatFlyghtStartDate, formatTravelTime, calculateDestinationTime } from '../../utils/formatDate'
 import { formatTransferText } from '../../utils/formatText'
 
 import classes from './Ticket.module.scss'
-const nanoid = customAlphabet('1234567890abcef', 5)
 
 const Ticket = ({ ticket }) => {
   const {
@@ -29,18 +27,6 @@ const Ticket = ({ ticket }) => {
   const timeOfDispatchR = formatFlyghtStartDate(dateReturn)
   const timeOfArriveR = calculateDestinationTime(dateReturn, durationReturn)
 
-  const stopsCities = stops.map((el, i) => {
-    if (i === stops.length - 1) {
-      return <span key={nanoid()}>{el}</span>
-    }
-    return <span key={nanoid()}>{el}, </span>
-  })
-  const stopsCitiesR = stopsReturn.map((el, i) => {
-    if (i === stops.length - 1) {
-      return <span key={nanoid()}>{el}</span>
-    }
-    return <span key={nanoid()}>{el}, </span>
-  })
   return (
     <li className={classes.ticket}>
       <div className={classes['ticket-header']}>
@@ -63,7 +49,7 @@ const Ticket = ({ ticket }) => {
           </div>
           <div className={classes['ticket__segments']}>
             <span className={classes['ticket__text--gray']}>{formatTransferText(stops.length)}</span>
-            <span>{stopsCities}</span>
+            <span>{stops.join(',')}</span>
           </div>
         </div>
         <div className={classes['ticket__info']}>
@@ -81,7 +67,7 @@ const Ticket = ({ ticket }) => {
           </div>
           <div className={classes['ticket__segments']}>
             <span className={classes['ticket__text--gray']}>{formatTransferText(stopsReturn.length)}</span>
-            <span>{stopsCitiesR}</span>
+            <span>{stopsReturn.join(',')}</span>
           </div>
         </div>
       </div>
